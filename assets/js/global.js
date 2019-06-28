@@ -54,6 +54,25 @@ $(document).ready(function() {
             });
         }
 
+        this.clickImages = function(img)  {
+            $(document).on('click', img, function() {
+            
+                var state = $(this).attr('data-state');
+
+                if(state === 'still') {
+                    $(this)
+                      .attr('data-state', 'animate')
+                      .attr('src', $(this).attr('data-animate'));
+                }
+                else if(state === 'animate') {
+                    $(this)
+                    .attr('data-state', 'still')
+                    .attr('src', $(this).attr('data-still'));
+                }
+            
+            });
+        };
+
     } 
 
 
@@ -63,6 +82,7 @@ $(document).ready(function() {
 
     createGiphyImagesObj.clickBtns('button');
 
+    createGiphyImagesObj.clickImages('img');
 
 
 
