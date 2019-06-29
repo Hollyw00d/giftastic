@@ -3,9 +3,10 @@ $(document).ready(function() {
     function CreateGiphyImages() {
         var $buttonsContainer = $('#buttons-container');
         var $gifsContainer = $('#gifs-container');
+        var $newBtnInput = $('#new-btn-input');
 
         var topics = [
-            'basketball',
+            'curling',
             'rugby',
             'running',
             'tennis',
@@ -44,9 +45,17 @@ $(document).ready(function() {
                                 src: item.images.fixed_height_still.url
                                 
                             });
-                        var imageAndParagraph = $('<p>').append(giphyImg);
+                        var imageAndParagraph = $('<p>')
+                            .append(item.rating)
+                            .append('<br />')
+                            .append(giphyImg);
+                        
+                        
+                        
+
+                        
     
-                        $gifsContainer.append(imageAndParagraph);
+                        $gifsContainer.prepend(imageAndParagraph);
                     });
 
                 });
@@ -73,6 +82,23 @@ $(document).ready(function() {
             });
         };
 
+        this.createNewButtons = function(submit) {
+            $(document).on('click', submit, function() {
+
+                var newBtn = $('<button>');
+                newBtn
+                    .attr('data-gif', $newBtnInput.val())
+                    .text($newBtnInput.val());
+                
+                $buttonsContainer.append(newBtn);    
+
+                $newBtnInput.val('');    
+
+
+            });
+        }
+
+
     } 
 
 
@@ -83,6 +109,8 @@ $(document).ready(function() {
     createGiphyImagesObj.clickBtns('button');
 
     createGiphyImagesObj.clickImages('img');
+
+    createGiphyImagesObj.createNewButtons('#add-btn');
 
 
 
