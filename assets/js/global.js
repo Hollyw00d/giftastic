@@ -15,13 +15,23 @@ $(document).ready(function() {
 
         this.createButtons = function() {
             topics.map(function(btn) {
-                $buttonsContainer.append('<button data-gif=' + btn + '>' + btn + '</button>');
+                $buttonsContainer.append('<button data-gif=' + btn + ' class="btn btn-success">' + btn + '</button>');
             });
         };
         
         this.clickBtns = function(btn) {
             $(document).on('click', btn, function() {
                 var sport = $(this).attr('data-gif');
+
+                var $buttons = $('button');
+                
+                $buttons
+                    .removeClass('btn-warning')
+                    .addClass('btn-success');
+
+                $(this)
+                    .removeClass('btn-success')
+                    .addClass('btn-warning');
 
                 var apiKey = 'LCb1JsqOsoUxBDkNU3BL8xN709losvDO';
 
