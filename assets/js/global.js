@@ -98,7 +98,8 @@ $(document).ready(function() {
                 var newBtn = $('<button>');
                 newBtn
                     .attr('data-gif', $newBtnInput.val())
-                    .text($newBtnInput.val());
+                    .text($newBtnInput.val())
+                    .addClass('btn btn-success');
                 
                 $buttonsContainer.append(newBtn);    
 
