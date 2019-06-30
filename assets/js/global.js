@@ -61,6 +61,7 @@ $(document).ready(function() {
                     // Assign results variable to response.data
                     // which is an object
                     var results = response.data;
+                    console.log(results);
                     // Use results.map to iterate through 
                     // response.data array
                     results.map(function(item) {
@@ -76,15 +77,17 @@ $(document).ready(function() {
                         "data-animate" attribute
                         with animated GIF image value.
                         Add "src" attribute with 
-                        still GIF value.
+                        still GIF value and finally
+                        add "alt" attribute with
+                        text describing image.
                         */ 
                         giphyImg
                             .attr({
                                 'data-state': 'still',
                                 'data-still': item.images.fixed_height_still.url,
                                 'data-animate': item.images.fixed_height.url,
-                                src: item.images.fixed_height_still.url
-                                
+                                src: item.images.fixed_height_still.url,
+                                alt: item.title
                             });
                         // Create paragraph tag then
                         // append item.rating to it at top
