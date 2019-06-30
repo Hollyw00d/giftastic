@@ -22,9 +22,7 @@ $(document).ready(function() {
         this.clickBtns = function(btn) {
             $(document).on('click', btn, function() {
                 var sport = $(this).attr('data-gif');
-
                 var $buttons = $('button');
-                
                 $buttons
                     .removeClass('btn-warning')
                     .addClass('btn-success');
@@ -43,9 +41,7 @@ $(document).ready(function() {
                     method: "GET"
                 }).then(function(response) {
                     var results = response.data;
-
                     results.map(function(item) {
-                        console.log(item);
                         var giphyImg = $('<img>');
                         giphyImg
                             .attr({
@@ -59,25 +55,15 @@ $(document).ready(function() {
                             .append(item.rating)
                             .append('<br />')
                             .append(giphyImg);
-                        
-                        
-                        
-
-                        
-    
                         $gifsContainer.prepend(imageAndParagraph);
                     });
-
                 });
-
             });
         }
 
         this.clickImages = function(img)  {
             $(document).on('click', img, function() {
-            
                 var state = $(this).attr('data-state');
-
                 if(state === 'still') {
                     $(this)
                       .attr('data-state', 'animate')
@@ -88,13 +74,11 @@ $(document).ready(function() {
                     .attr('data-state', 'still')
                     .attr('src', $(this).attr('data-still'));
                 }
-            
             });
         };
 
         this.createNewButtons = function(submit) {
             $(document).on('click', submit, function() {
-
                 var newBtn = $('<button>');
                 newBtn
                     .attr('data-gif', $newBtnInput.val())
@@ -102,27 +86,27 @@ $(document).ready(function() {
                     .addClass('btn btn-success');
                 
                 $buttonsContainer.append(newBtn);    
-
                 $newBtnInput.val('');    
-
-
             });
         }
 
+        this.resetBtn = function(resetBtn) {
+            var that = this;
 
+            $(document).on('click', resetBtn, function() {
+                $buttonsContainer.empty();
+                $gifsContainer.empty();
+                that.createButtons();
+                $newBtnInput.val('');   
+            });
+        }
     } 
-
 
     var createGiphyImagesObj = new CreateGiphyImages();
 
     createGiphyImagesObj.createButtons();
-
     createGiphyImagesObj.clickBtns('button');
-
     createGiphyImagesObj.clickImages('img');
-
     createGiphyImagesObj.createNewButtons('#add-btn');
-
-
-
+    createGiphyImagesObj.resetBtn('#reset-btn');
 });
