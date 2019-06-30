@@ -54,14 +54,18 @@ $(document).ready(function() {
                 $.ajax({
                     url: queryURL,
                     method: "GET"
-                // then method on $.ajax call which only
+                // done method on $.ajax call which only
                 // shows a success response when $.ajax
-                // is queried successfully     
-                }).then(function(response) {
+                // is queried successfully in 1st callback
+                // and in 2nd callback shows failure note
+                // when AJAX query fails     
+                }).done(function(response) {
+                    // Empty $gifsContainer in case
+                    // error messages are present
+                    $gifsContainer.empty();
                     // Assign results variable to response.data
                     // which is an object
                     var results = response.data;
-                    console.log(results);
                     // Use results.map to iterate through 
                     // response.data array
                     results.map(function(item) {
@@ -102,6 +106,9 @@ $(document).ready(function() {
                         // to $gifsContainer    
                         $gifsContainer.prepend(imageAndParagraph);
                     });
+                // Failure callback below    
+                }).fail(function(response) {
+                    $gifsContainer.append('<h2 class="h4 font-italic">Something went wrong and your GIF image search failed.<br />Please try again!</h2>');
                 });
             });
         }
@@ -119,8 +126,8 @@ $(document).ready(function() {
                 }
                 else if(state === 'animate') {
                     $(this)
-                    .attr('data-state', 'still')
-                    .attr('src', $(this).attr('data-still'));
+                      .attr('data-state', 'still')
+                      .attr('src', $(this).attr('data-still'));
                 }
             });
         };
