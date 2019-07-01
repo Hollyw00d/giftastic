@@ -138,6 +138,10 @@ $(document).ready(function() {
         // input#add-btn element
         this.createNewButtons = function(submit) {
             $(document).on('click', submit, function() {
+                // Remove error messages when
+                // adding new buttons
+                $gifsContainer.find('h2').remove();
+
                 var newBtn = $('<button>');
                 newBtn
                     .attr('data-gif', $newBtnInput.val())
