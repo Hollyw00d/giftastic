@@ -20,7 +20,7 @@ $(document).ready(function() {
         // array above
         this.createButtons = function() {
             topics.map(function(btn) {
-                $buttonsContainer.append('<button data-gif=' + btn + ' class="btn btn-success">' + btn + '</button>');
+                $buttonsContainer.append('<button data-gif=' + btn + ' class="btn btn-success mr-3 mb-3">' + btn + '</button>');
             });
         };
         
@@ -60,9 +60,11 @@ $(document).ready(function() {
                 // and in 2nd callback shows failure note
                 // when AJAX query fails     
                 }).done(function(response) {
-                    // Empty $gifsContainer in case
-                    // error messages are present
-                    $gifsContainer.empty();
+                    // Remove error messages if
+                    // successfully finding 
+                    // giphy data
+                    $gifsContainer.find('h2').remove();
+
                     // Assign results variable to response.data
                     // which is an object
                     var results = response.data;
@@ -99,7 +101,7 @@ $(document).ready(function() {
                         // and append giphyImg at button
                         // of paragraph tag     
                         var imageAndParagraph = $('<p>')
-                            .append(item.rating)
+                            .append('Rating: ' + item.rating)
                             .append('<br />')
                             .append(giphyImg);
                         // Prepend imageAndParagraph variable
@@ -108,7 +110,7 @@ $(document).ready(function() {
                     });
                 // Failure callback below    
                 }).fail(function(response) {
-                    $gifsContainer.append('<h2 class="h4 font-italic">Something went wrong and your GIF image search failed.<br />Please try again!</h2>');
+                    $gifsContainer.prepend('<h2 class="h4 font-italic">Something went wrong and your GIF image search failed.<br />Please try again!</h2>');
                 });
             });
         }
@@ -140,7 +142,7 @@ $(document).ready(function() {
                 newBtn
                     .attr('data-gif', $newBtnInput.val())
                     .text($newBtnInput.val())
-                    .addClass('btn btn-success');
+                    .addClass('btn btn-success mr-3 mb-3');
                 
                 $buttonsContainer.append(newBtn);    
                 $newBtnInput.val('');    
