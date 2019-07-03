@@ -137,20 +137,25 @@ $(document).ready(function() {
         // Create new buttons when clicking on
         // input#add-btn element
         this.createNewButtons = function(submit) {
-            $(document).on('click', submit, function() {
-                // Remove error messages when
-                // adding new buttons
-                $gifsContainer.find('h2').remove();
 
-                var newBtn = $('<button>');
-                newBtn
-                    .attr('data-gif', $newBtnInput.val())
-                    .text($newBtnInput.val())
-                    .addClass('btn btn-success mr-3 mb-3');
-                
-                $buttonsContainer.append(newBtn);    
-                $newBtnInput.val('');    
-            });
+                $(document).on('click', submit, function() {
+                    // Only if $newBtnInput value is NOT empty string
+                    // then add new button
+                    if($newBtnInput.val() !== '') {
+                        // Remove error messages when
+                        // adding new buttons
+                        $gifsContainer.find('h2').remove();
+        
+                        var newBtn = $('<button>');
+                        newBtn
+                            .attr('data-gif', $newBtnInput.val())
+                            .text($newBtnInput.val())
+                            .addClass('btn btn-success mr-3 mb-3');
+                        
+                        $buttonsContainer.append(newBtn);    
+                        $newBtnInput.val('');   
+                    }     
+                });
         }
 
         // Reset everything, including
